@@ -5,7 +5,7 @@ const ramens = [
     { id: 4, name: "Nirvana Ramen", restaurant: "Nirvana", image: "images/nirvana.jpg", rating: 4, comment: "Authentic Japanese ramen!" },
     { id: 5, name: "Shoyu Ramen", restaurant: "Shoyu", image: "images/shoyu.jpg", rating: 2, comment: "Not my favorite." },
 ];
-// Displays all ramen images in ramen-menu(html)
+// displayRamens() - Displays all ramen images in ramen-menu(html)
 function displayRamens() {
     const myNode = document.getElementById("ramen-menu");
     while (myNode.firstChild) {
@@ -21,7 +21,8 @@ function displayRamens() {
         handleClick(0)
     }
 }
-//Shows ramen details when an img is clicked
+
+//handleClick() - Shows ramen details when an img is clicked
 function handleClick(index) {
     const ramen = ramens[index];
     document.getElementById("mainImage").src = ramen.image;
@@ -30,7 +31,7 @@ function handleClick(index) {
     document.getElementById("ramenRating").textContent = ramen.rating;
     document.getElementById("ramenComment").textContent = ramen.comment;
 }
-//Adds new ramen when entered in a form
+//addSubmitListener() - Adds new ramen when entered in a form
 function addSubmitListener() {
     document.getElementById("ramen-form").addEventListener("submit", function (event) {
         event.preventDefault(); //prevents the page from refreshing
@@ -46,20 +47,20 @@ function addSubmitListener() {
             alert("Please fill all fields");
             return;
         }
-        //Adds new ramen to the ramens array
-        ramens.push({ name, restaurant, image, rating: parseInt(rating), comment });
-        //Refreshes the ramen menu
-        displayRamens();
-        //Creates a new ramen object
-        const newRamen = { name, restaurant, image, rating: parseInt(rating), comment };
-        //Adds a new ramen to array
-        ramens.push(newRamen);
-        //Adds a new ramen img to the menu 
-        addRamenToMenu(newRamen, ramens.length - 1);
-        //Displays all newly added ramen details
-        handleClick(ramens.length - 1);
-        //Clears form fields
-        document.getElementById("ramen-form").reset();
+        
+        ramens.push({ name, restaurant, image, rating: parseInt(rating), comment }); //Adds new ramen to the ramens array
+        
+        displayRamens(); //Refreshes the ramen menu
+        
+        const newRamen = { name, restaurant, image, rating: parseInt(rating), comment }; //Creates a new ramen object
+        
+        ramens.push(newRamen); //Adds a new ramen to array
+         
+        addRamenToMenu(newRamen, ramens.length - 1); //Adds a new ramen img to the menu
+        
+        handleClick(ramens.length - 1); //Displays all newly added ramen details
+        
+        document.getElementById("ramen-form").reset(); //Clears form fields
     });
 }
 
